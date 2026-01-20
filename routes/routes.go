@@ -8,10 +8,10 @@ import (
 
 
 func SetupRoutes(r *gin.Engine) {
-	// Root route
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "Welcome to Go Todo API!"})
-	})
+	// Web routes
+	r.GET("/", controllers.Index)
+	
+	// API routes
 	r.GET("/todos", controllers.GetTodos)
 	r.POST("/todos", controllers.CreateTodo)
 	r.PUT("/todos/:id", controllers.UpdateTodo)

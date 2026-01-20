@@ -8,7 +8,17 @@ import (
 	"go-todo/models"
 )
 
-// GET /todos
+// GET / - Render home page with todos
+func Index(c *gin.Context) {
+	var todos []models.Todo
+	database.DB.Order("created_at desc").Find(&todos)
+	c.HTML(http.StatusOK, "base.html", gin.H{
+		"Title": "Home",
+		"Todos": todos,
+	})
+}
+
+// GET /todos - API endpoint
 func GetTodos(c *gin.Context) {
 	var todos []models.Todo
 	database.DB.Find(&todos)
